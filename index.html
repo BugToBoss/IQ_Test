@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>اختبار الذكاء - IQ Test</title>
+    <link rel="icon" type="image/png" href="iq/iraq.png">
+    <link rel="apple-touch-icon" href="iq/iraq.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- شريط اللغة والوضع المضلم -->
+    <div class="top-bar">
+        <div class="language-bar">
+            <button class="lang-btn active" data-lang="ar">العربية</button>
+            <button class="lang-btn" data-lang="en">English</button>
+        </div>
+        <button class="theme-toggle" id="theme-toggle">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+
+    <!-- الشاشة الرئيسية -->
+    <div class="container" id="welcome-screen">
+        <div class="welcome-content">
+            <h1 class="title" data-ar="اختبار الذكاء" data-en="IQ Test">اختبار الذكاء</h1>
+            <p class="subtitle" data-ar="اكتشف مستوى ذكائك من خلال 15 سؤال متنوع" data-en="Discover your intelligence level through 15 diverse questions">اكتشف مستوى ذكائك من خلال 15 سؤال متنوع</p>
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon">🧠</span>
+                    <span data-ar="أسئلة ذكية" data-en="Smart Questions">أسئلة ذكية</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <span data-ar="نتيجة فورية" data-en="Instant Results">نتيجة فورية</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎯</span>
+                    <span data-ar="تقييم دقيق" data-en="Accurate Assessment">تقييم دقيق</span>
+                </div>
+            </div>
+            <button class="start-btn" id="start-test" data-ar="ابدأ الاختبار" data-en="Start Test">ابدأ الاختبار</button>
+        </div>
+    </div>
+
+    <!-- شاشة الاختبار -->
+    <div class="container hidden" id="test-screen">
+        <div class="test-header">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="question-counter">
+                <span data-ar="السؤال" data-en="Question">السؤال</span>
+                <span id="current-question">1</span>
+                <span data-ar="من" data-en="of">من</span>
+                <span id="total-questions">15</span>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h2 class="question-text" id="question-text"></h2>
+            <div class="options-container" id="options-container">
+                <!-- الخيارات ستضاف ديناميكياً -->
+            </div>
+        </div>
+
+        <div class="test-navigation">
+            <button class="nav-btn" id="prev-btn" data-ar="السابق" data-en="Previous">السابق</button>
+            <button class="nav-btn" id="next-btn" data-ar="التالي" data-en="Next">التالي</button>
+        </div>
+    </div>
+
+    <!-- شاشة النتائج -->
+    <div class="container hidden" id="results-screen">
+        <div class="results-content">
+            <h1 class="title" data-ar="نتيجة اختبار الذكاء" data-en="IQ Test Results">نتيجة اختبار الذكاء</h1>
+            
+            <div class="iq-display">
+                <div class="iq-circle">
+                    <span class="iq-number" id="iq-score">0</span>
+                    <span class="iq-label" data-ar="معدل الذكاء" data-en="IQ Score">معدل الذكاء</span>
+                </div>
+            </div>
+
+            <div class="iq-level" id="iq-level">
+                <!-- مستوى الذكاء سيضاف ديناميكياً -->
+            </div>
+
+            <div class="score-details">
+                <div class="detail-item">
+                    <span class="detail-label" data-ar="الإجابات الصحيحة:" data-en="Correct Answers:">الإجابات الصحيحة:</span>
+                    <span class="detail-value" id="correct-answers">0/15</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label" data-ar="النسبة المئوية:" data-en="Percentage:">النسبة المئوية:</span>
+                    <span class="detail-value" id="percentage">0%</span>
+                </div>
+            </div>
+
+            <div class="iq-description" id="iq-description">
+                <!-- وصف مستوى الذكاء سيضاف ديناميكياً -->
+            </div>
+
+            <!-- نصيحة شخصية -->
+            <div class="personal-advice" id="personal-advice">
+                <!-- النصيحة ستضاف ديناميكياً -->
+            </div>
+
+            <!-- قسم تفاصيل الإجابات -->
+            <div class="answers-review">
+                <h3 class="review-title" data-ar="مراجعة الإجابات" data-en="Review Answers">مراجعة الإجابات</h3>
+                <div class="answers-container" id="answers-container">
+                    <!-- تفاصيل الإجابات ستضاف ديناميكياً -->
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn primary" id="retake-test" data-ar="إعادة الاختبار" data-en="Retake Test">إعادة الاختبار</button>
+                <button class="action-btn secondary" id="share-result" data-ar="مشاركة النتيجة" data-en="Share Result">مشاركة النتيجة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- حقوق النشر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="copyright" data-ar="جميع الحقوق محفوظة © 2025-2026 | صنع بواسطة Mohmmed Ali" data-en="All Rights Reserved © 2025-2026 | Made by Mohmmed Ali">
+                جميع الحقوق محفوظة © 2025-2026 | صنع بواسطة Mohmmed Ali
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
